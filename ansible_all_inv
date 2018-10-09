@@ -1,0 +1,10 @@
+[all]
+front1
+front2
+db1
+db2
+back1
+back2
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3

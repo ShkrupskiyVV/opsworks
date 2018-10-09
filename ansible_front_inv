@@ -1,0 +1,6 @@
+[front]
+front1
+front2
+
+[front:vars]
+ansible_python_interpreter=/usr/bin/python3

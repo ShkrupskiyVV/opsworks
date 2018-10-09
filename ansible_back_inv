@@ -1,0 +1,6 @@
+[back]
+back1
+back2
+
+[back:vars]
+ansible_python_interpreter=/usr/bin/python3

@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks:
+  - name: install packages
+    apt: name=mc state=latest update_cache=yes
