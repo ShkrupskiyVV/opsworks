@@ -3,3 +3,5 @@
   tasks:
   - name: install packages
     apt: name=mc state=latest update_cache=yes
+  - copy: src=/etc/hosts dest=/etc/hosts backup=yes
+

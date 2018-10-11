@@ -5,6 +5,15 @@
       apt: name=apache2 state=latest update_cache=yes
     - name: install mod_php
       apt: name=libapache2-mod-php state=present update_cache=yes
+    - name: install php-mysql
+      apt: name=php-mysql state=present update_cache=yes
     - name: start apache2
       service: name=apache2 state=started enabled=yes
- 
+    - name: download wordpress
+      get_url: url=https://wordpress.org/latest.tar.gz dest=/tmp/wordpress.tar.gz 
+    - name: extract wordpress 
+      unarchive: src=/tmp/wordpress.tar.gz dest=/var/www/ copy=no 
+    - name: update apache site
+      lineinfile: dest=/etc/apache2/sites-enabled/000-default.conf regexp="(.)+DocumentRoot /var/www/html" line="DocumentRoot /var/www/wordpress"
+    - name: restart apache
+      service: name=apache2 state=restarted 

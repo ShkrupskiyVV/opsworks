@@ -1,0 +1,15 @@
+---
+- hosts: db
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes cache_valid_time=3600
+    - name: install mysql
+      apt: name=mysql-server state=latest
+    - name: install python-mysqldb
+      apt: name=python3-mysqldb state=latest
+    - name: start mysql
+      service: name=mysql state=started enabled=yes
+    - name: create mysql database
+      mysql_db: name=wordpress state=present
+    - name: create mysql user
+      mysql_user: name=wordpress password=P@ssw0rd2018 priv=*.*:ALL
