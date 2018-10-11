@@ -13,3 +13,9 @@
       mysql_db: name=wordpress state=present
     - name: create mysql user
       mysql_user: name=wordpress password=P@ssw0rd2018 priv=*.*:ALL
+    - name: config mysql
+      lineinfile: dest=/etc/mysql/mysql.conf.d/mysqld.cnf regexp="^bind-address" state=absent
+    - name: config mysql2      
+      lineinfile: dest=/etc/mysql/mysql.conf.d/mysqld.cnf insertbefore=BOF line="bind-address=0.0.0.0"
+    - name: restart mysql
+      service: name=mysql state=restarted

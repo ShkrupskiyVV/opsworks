@@ -15,5 +15,15 @@
       unarchive: src=/tmp/wordpress.tar.gz dest=/var/www/ copy=no 
     - name: update apache site
       lineinfile: dest=/etc/apache2/sites-enabled/000-default.conf regexp="(.)+DocumentRoot /var/www/html" line="DocumentRoot /var/www/wordpress"
+    - name: config wordpress
+      command: mv /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php creates=/var/www/wordpress/wp-config.php
+    - name: config wordpress2
+      lineinfile: dest=/var/www/wordpress/wp-config.php regexp="define\\('DB_NAME', '(.)+'\\);" line="define('DB_NAME', 'wordpress');"
+    - name: config wordpress3
+      lineinfile: dest=/var/www/wordpress/wp-config.php regexp="define\\('DB_USER', '(.)+'\\);" line="define('DB_USER', 'wordpress');"
+    - name: config wordpress4
+      lineinfile: dest=/var/www/wordpress/wp-config.php regexp="define\\('DB_PASSWORD', '(.)+'\\);" line="define('DB_PASSWORD', 'P@ssw0rd2018');"
+    - name: config wordpress5
+      lineinfile: dest=/var/www/wordpress/wp-config.php regexp="define\\('DB_HOST', '(.)+'\\);" line="define('DB_HOST', 'db1');"
     - name: restart apache
-      service: name=apache2 state=restarted 
+      service: name=apache2 state=restarted
